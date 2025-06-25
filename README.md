@@ -24,7 +24,7 @@ venv\Scripts\activate
 # On Unix/Mac:
 source venv/bin/activate
 pip install -r requirements.txt
-```
+
 
 ---
 
