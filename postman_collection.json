@@ -1,0 +1,110 @@
+{
+  "info": {
+    "_postman_id": "secure-file-sharing-api",
+    "name": "Secure File Sharing API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Ops Login",
+      "request": {
+        "method": "POST",
+        "header": [
+          {"key": "Content-Type", "value": "application/x-www-form-urlencoded"}
+        ],
+        "body": {
+          "mode": "urlencoded",
+          "urlencoded": [
+            {"key": "username", "value": "ops@example.com"},
+            {"key": "password", "value": "opspass123"}
+          ]
+        },
+        "url": {"raw": "{{baseUrl}}/ops/login", "host": ["{{baseUrl}}"], "path": ["ops", "login"]}
+      }
+    },
+    {
+      "name": "Ops Upload File",
+      "request": {
+        "method": "POST",
+        "header": [
+          {"key": "Authorization", "value": "Bearer {{ops_token}}"}
+        ],
+        "body": {
+          "mode": "formdata",
+          "formdata": [
+            {"key": "file", "type": "file", "src": ""}
+          ]
+        },
+        "url": {"raw": "{{baseUrl}}/ops/upload", "host": ["{{baseUrl}}"], "path": ["ops", "upload"]}
+      }
+    },
+    {
+      "name": "Client Signup",
+      "request": {
+        "method": "POST",
+        "header": [
+          {"key": "Content-Type", "value": "application/json"}
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"email\": \"testclient@example.com\",\n  \"password\": \"testpass123\"\n}"
+        },
+        "url": {"raw": "{{baseUrl}}/client/signup", "host": ["{{baseUrl}}"], "path": ["client", "signup"]}
+      }
+    },
+    {
+      "name": "Client Verify Email",
+      "request": {
+        "method": "GET",
+        "url": {"raw": "{{baseUrl}}/client/verify-email?token={{verify_token}}", "host": ["{{baseUrl}}"], "path": ["client", "verify-email"], "query": [{"key": "token", "value": "{{verify_token}}"}]}
+      }
+    },
+    {
+      "name": "Client Login",
+      "request": {
+        "method": "POST",
+        "header": [
+          {"key": "Content-Type", "value": "application/x-www-form-urlencoded"}
+        ],
+        "body": {
+          "mode": "urlencoded",
+          "urlencoded": [
+            {"key": "username", "value": "testclient@example.com"},
+            {"key": "password", "value": "testpass123"}
+          ]
+        },
+        "url": {"raw": "{{baseUrl}}/client/login", "host": ["{{baseUrl}}"], "path": ["client", "login"]}
+      }
+    },
+    {
+      "name": "Client List Files",
+      "request": {
+        "method": "GET",
+        "header": [
+          {"key": "Authorization", "value": "Bearer {{client_token}}"}
+        ],
+        "url": {"raw": "{{baseUrl}}/client/files", "host": ["{{baseUrl}}"], "path": ["client", "files"]}
+      }
+    },
+    {
+      "name": "Client Download Link",
+      "request": {
+        "method": "GET",
+        "header": [
+          {"key": "Authorization", "value": "Bearer {{client_token}}"}
+        ],
+        "url": {"raw": "{{baseUrl}}/client/download-file/{{file_id}}", "host": ["{{baseUrl}}"], "path": ["client", "download-file", "{{file_id}}"]}
+      }
+    },
+    {
+      "name": "Download File",
+      "request": {
+        "method": "GET",
+        "header": [
+          {"key": "Authorization", "value": "Bearer {{client_token}}"}
+        ],
+        "url": {"raw": "{{baseUrl}}/download/{{token}}", "host": ["{{baseUrl}}"], "path": ["download", "{{token}}"]}
+      }
+    }
+  ]
+} 
